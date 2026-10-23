@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="See what changed after a Windows software install. Compare snapshots locally and inspect what remains after uninstall.">
+  <title>KingAftermath — See what stayed behind</title>
+  <link rel="stylesheet" href="/styles.css"><script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to comparison</a>
+  <header class="topbar"><a class="brand" href="/" aria-label="KingAftermath home"><span class="brandmark">KA</span><span>King<span class="brandlight">Aftermath</span><small>WINDOWS CHANGE EXPLORER</small></span></a><div class="topactions"><span class="local-label"><span class="dot"></span> Local · read only</span><button id="guide-open" class="button quiet">Capture guide</button></div></header>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="Snapshot workspace">
+      <div class="eyebrow">YOUR WORKSPACE <span>01—03</span></div>
+      <h2>Follow the footprint.</h2><p class="muted">Capture a moment. Make a change.<br>See what followed.</p>
+      <div id="snapshots" class="snapshot-stack"></div>
+      <button id="demo" class="button sample">Load fictional example <span aria-hidden="true">↗</span></button>
+      <button id="package-save" class="button sample">Save investigation <span aria-hidden="true">↓</span></button>
+      <label class="button sample" for="package-open">Open investigation <span aria-hidden="true">↑</span></label><input class="file-input" id="package-open" type="file" accept=".json" aria-label="Open investigation package">
+      <p class="privacy-note">Files stay in this tab. Export captures to keep them after closing or reloading.</p>
+      <div class="sidebar-foot"><strong>Observe first.</strong><p>KingAftermath never removes software or changes Windows settings.</p><span>v0.2.0 / WINDOWS</span></div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <section class="pagehead"><div><div class="eyebrow">THE AFTER PICTURE</div><h1>See what stayed behind.</h1><p>Software leaves a footprint. Put the changes under a microscope.</p></div><button id="export" class="button primary" disabled>Export report <span aria-hidden="true">↓</span></button></section>
+      <nav class="mode-tabs" aria-label="Comparison mode"><button data-mode="investigate" aria-pressed="false">Investigate an app</button><button data-mode="install" aria-pressed="true">Install changes</button><button data-mode="uninstall" aria-pressed="false">Uninstall changes</button><button data-mode="residual" aria-pressed="false">What remains</button></nav>
+      <div id="comparison"></div>
+      <details id="review-panel" class="review-panel"><summary>Investigation notes and capture context <span id="review-status">In tab memory · export to save</span></summary><label>Investigation title<input id="review-title" maxlength="200" placeholder="Application, version, reason for investigation"></label><label>Notes<textarea id="review-notes" maxlength="20000" rows="4" placeholder="Findings, questions and follow-up actions…"></textarea></label><div id="capture-contexts"></div><p class="muted">Notes and decisions are operator assertions, separate from collected evidence. Save the investigation package to preserve them.</p></details>
+      <footer class="mainfoot"><span>Evidence over assumptions.</span><span>Observed together does not mean caused by the installer.</span></footer>
+    </main>
+  </div>
+  <dialog id="guide" aria-labelledby="guide-title"><div class="dialoghead"><span class="eyebrow">FROM YOUR WINDOWS PC</span><button id="guide-close" class="button quiet" aria-label="Close capture guide">Close ×</button></div><h2 id="guide-title">Capture once, or follow an install.</h2><p class="callout"><strong>Windows capture desk:</strong> double-click <code>Capture.cmd</code> in this project folder. Create a named investigation, optionally add application folders, then use the three capture buttons. You can also capture once and use Investigate an app. The launcher keeps the folder scope fixed and shows where each capture was saved.</p><p>Use the same Windows account, collector version and privilege level for every capture. Close unrelated installers and updaters to reduce background changes.</p><ol class="guide-steps"><li><strong>Before you install</strong><p>Download the collector into your project folder. In a 64-bit PowerShell terminal, run:</p><pre>powershell -NoProfile -File .\collectors\Capture-KingAftermath.ps1 -Label "Before install" -OutFile .\captures\before.json</pre></li><li><strong>After you install</strong><p>Install your chosen app normally, then capture again:</p><pre>powershell -NoProfile -File .\collectors\Capture-KingAftermath.ps1 -Label "After install" -OutFile .\captures\installed.json</pre></li><li><strong>After you uninstall</strong><p>Uninstall through Windows Settings, wait for it to finish, then capture:</p><pre>powershell -NoProfile -File .\collectors\Capture-KingAftermath.ps1 -Label "After uninstall" -OutFile .\captures\uninstalled.json</pre></li></ol><p class="callout">A standalone download may land in Downloads. Move it into a <code>collectors</code> folder before using these commands, or change the script path. Follow your organization’s script policy. Administrative access can improve coverage; it is not requested automatically.</p><a href="/collector" download="Capture-KingAftermath.ps1" class="button primary">Download Windows collector ↓</a><h3>What gets captured?</h3><p>Application uninstall registry records, Run/RunOnce entries, startup folder file hashes, service configuration and selected task configuration. No file contents from application folders, browser profiles, passwords or browsing history are collected. Command arguments and local paths can still be sensitive.</p><p class="muted">This is a bounded inventory, not a complete forensic record. No browser extensions, drivers, arbitrary registry changes, package-store inventory or other users’ profiles are covered in v0.1.</p></dialog>
+</body>
+</html>

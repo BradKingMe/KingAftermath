@@ -1,0 +1,112 @@
+{
+  "format": "kingaftermath.snapshot",
+  "version": 2,
+  "collector": "windows-0.2.0",
+  "id": "demo-before",
+  "label": "Before AsterDesk install",
+  "capturedAt": "2026-10-23T14:00:00Z",
+  "machine": {
+    "id": "fictional-workstation",
+    "userId": "fictional-demo-user",
+    "name": "DEMO-WORKSTATION",
+    "os": "Windows 11 (fictional example)",
+    "scope": "fictional-windows64-v2-with-targets-and-folder"
+  },
+  "sections": {
+    "apps": {
+      "status": "complete",
+      "warnings": [],
+      "items": [
+        {
+          "id": "lm/64/uninstall/notepad",
+          "name": "Notepad++",
+          "source": "LocalMachine/Registry64/Uninstall/Notepad++",
+          "fields": {
+            "Version": "8.7",
+            "Publisher": "Notepad++ Team",
+            "InstallLocation": "C:\\Program Files\\Notepad++"
+          }
+        }
+      ]
+    },
+    "startup": {
+      "status": "complete",
+      "warnings": [],
+      "items": [
+        {
+          "id": "cu/64/run/desksync",
+          "name": "DeskSync",
+          "source": "CurrentUser/Registry64/Run",
+          "fields": {
+            "Command": "\"C:\\Users\\Demo\\AppData\\Local\\DeskSync\\sync.exe\" --background"
+          },
+          "targets": [
+            {
+              "input": "\"C:\\Users\\Demo\\AppData\\Local\\DeskSync\\sync.exe\" --background",
+              "path": "C:\\Users\\Demo\\AppData\\Local\\DeskSync\\sync.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        }
+      ]
+    },
+    "services": {
+      "status": "complete",
+      "warnings": [],
+      "items": [
+        {
+          "id": "spooler",
+          "name": "Print Spooler",
+          "source": "CIM:Win32_Service",
+          "fields": {
+            "ServiceName": "Spooler",
+            "Executable": "C:\\Windows\\System32\\spoolsv.exe",
+            "StartMode": "Auto",
+            "Account": "LocalSystem"
+          },
+          "targets": [
+            {
+              "input": "C:\\Windows\\System32\\spoolsv.exe",
+              "path": "C:\\Windows\\System32\\spoolsv.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        }
+      ]
+    },
+    "tasks": {
+      "status": "complete",
+      "warnings": [],
+      "items": [
+        {
+          "id": "\\backup\\weekly",
+          "name": "Weekly backup",
+          "source": "\\Backup\\",
+          "fields": {
+            "Actions": "[{\"Execute\":\"C:\\\\Tools\\\\backup.exe\",\"Arguments\":\"--weekly\"}]",
+            "Enabled": "True",
+            "Account": "DEMO\\Operator"
+          },
+          "targets": [
+            {
+              "input": "C:\\Tools\\backup.exe",
+              "path": "C:\\Tools\\backup.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        }
+      ]
+    },
+    "files": {
+      "status": "complete",
+      "warnings": [],
+      "items": []
+    }
+  },
+  "tracking": [
+    "c:\\program files\\asterdesk"
+  ]
+}

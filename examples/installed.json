@@ -1,0 +1,235 @@
+{
+  "format": "kingaftermath.snapshot",
+  "version": 2,
+  "collector": "windows-0.2.0",
+  "id": "demo-installed",
+  "label": "After AsterDesk install",
+  "capturedAt": "2026-10-23T14:06:00Z",
+  "machine": {
+    "id": "fictional-workstation",
+    "userId": "fictional-demo-user",
+    "name": "DEMO-WORKSTATION",
+    "os": "Windows 11 (fictional example)",
+    "scope": "fictional-windows64-v2-with-targets-and-folder"
+  },
+  "sections": {
+    "apps": {
+      "status": "complete",
+      "warnings": [],
+      "items": [
+        {
+          "id": "lm/64/uninstall/notepad",
+          "name": "Notepad++",
+          "source": "LocalMachine/Registry64/Uninstall/Notepad++",
+          "fields": {
+            "Version": "8.7",
+            "Publisher": "Notepad++ Team",
+            "InstallLocation": "C:\\Program Files\\Notepad++"
+          }
+        },
+        {
+          "id": "lm/64/uninstall/asterdesk",
+          "name": "AsterDesk",
+          "source": "LocalMachine/Registry64/Uninstall/AsterDesk",
+          "fields": {
+            "Version": "2.4.0",
+            "Publisher": "Aster Software (fictional)",
+            "InstallLocation": "C:\\Program Files\\AsterDesk",
+            "UninstallCommand": "\"C:\\Program Files\\AsterDesk\\uninstall.exe\""
+          }
+        }
+      ]
+    },
+    "startup": {
+      "status": "complete",
+      "warnings": [],
+      "items": [
+        {
+          "id": "cu/64/run/desksync",
+          "name": "DeskSync",
+          "source": "CurrentUser/Registry64/Run",
+          "fields": {
+            "Command": "\"C:\\Users\\Demo\\AppData\\Local\\DeskSync\\sync.exe\" --background"
+          },
+          "targets": [
+            {
+              "input": "\"C:\\Users\\Demo\\AppData\\Local\\DeskSync\\sync.exe\" --background",
+              "path": "C:\\Users\\Demo\\AppData\\Local\\DeskSync\\sync.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        },
+        {
+          "id": "cu/64/run/astertray",
+          "name": "AsterDesk tray",
+          "source": "CurrentUser/Registry64/Run",
+          "fields": {
+            "Command": "\"C:\\Program Files\\AsterDesk\\tray.exe\" --startup",
+            "RegistryType": "String"
+          },
+          "targets": [
+            {
+              "input": "\"C:\\Program Files\\AsterDesk\\tray.exe\" --startup",
+              "path": "C:\\Program Files\\AsterDesk\\tray.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        },
+        {
+          "id": "cu/64/run/asterupdate",
+          "name": "AsterDesk update agent",
+          "source": "CurrentUser/Registry64/Run",
+          "fields": {
+            "Command": "\"C:\\Users\\Demo\\AppData\\Local\\AsterDesk\\update.exe\" --check",
+            "RegistryType": "String"
+          },
+          "targets": [
+            {
+              "input": "\"C:\\Users\\Demo\\AppData\\Local\\AsterDesk\\update.exe\" --check",
+              "path": "C:\\Users\\Demo\\AppData\\Local\\AsterDesk\\update.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        }
+      ]
+    },
+    "services": {
+      "status": "complete",
+      "warnings": [],
+      "items": [
+        {
+          "id": "spooler",
+          "name": "Print Spooler",
+          "source": "CIM:Win32_Service",
+          "fields": {
+            "ServiceName": "Spooler",
+            "Executable": "C:\\Windows\\System32\\spoolsv.exe",
+            "StartMode": "Manual",
+            "Account": "LocalSystem"
+          },
+          "targets": [
+            {
+              "input": "C:\\Windows\\System32\\spoolsv.exe",
+              "path": "C:\\Windows\\System32\\spoolsv.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        },
+        {
+          "id": "asterdeskservice",
+          "name": "AsterDesk background service",
+          "source": "CIM:Win32_Service",
+          "fields": {
+            "ServiceName": "AsterDeskService",
+            "Executable": "\"C:\\Program Files\\AsterDesk\\service.exe\"",
+            "StartMode": "Auto",
+            "Account": "LocalSystem"
+          },
+          "targets": [
+            {
+              "input": "\"C:\\Program Files\\AsterDesk\\service.exe\"",
+              "path": "C:\\Program Files\\AsterDesk\\service.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        }
+      ]
+    },
+    "tasks": {
+      "status": "complete",
+      "warnings": [],
+      "items": [
+        {
+          "id": "\\backup\\weekly",
+          "name": "Weekly backup",
+          "source": "\\Backup\\",
+          "fields": {
+            "Actions": "[{\"Execute\":\"C:\\\\Tools\\\\backup.exe\",\"Arguments\":\"--weekly\"}]",
+            "Enabled": "True",
+            "Account": "DEMO\\Operator"
+          },
+          "targets": [
+            {
+              "input": "C:\\Tools\\backup.exe",
+              "path": "C:\\Tools\\backup.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        },
+        {
+          "id": "\\asterdesk\\update",
+          "name": "AsterDesk update",
+          "source": "\\AsterDesk\\",
+          "fields": {
+            "Actions": "[{\"Execute\":\"C:\\\\Program Files\\\\AsterDesk\\\\update.exe\",\"Arguments\":\"--silent\"}]",
+            "Enabled": "True",
+            "RunLevel": "Highest"
+          },
+          "targets": [
+            {
+              "input": "C:\\Program Files\\AsterDesk\\update.exe",
+              "path": "C:\\Program Files\\AsterDesk\\update.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        },
+        {
+          "id": "\\asterdesk\\usage",
+          "name": "AsterDesk usage summary",
+          "source": "\\AsterDesk\\",
+          "fields": {
+            "Actions": "[{\"Execute\":\"C:\\\\Users\\\\Demo\\\\AppData\\\\Local\\\\AsterDesk\\\\usage.exe\",\"Arguments\":\"--daily\"}]",
+            "Enabled": "True",
+            "RunLevel": "Limited"
+          },
+          "targets": [
+            {
+              "input": "C:\\Users\\Demo\\AppData\\Local\\AsterDesk\\usage.exe",
+              "path": "C:\\Users\\Demo\\AppData\\Local\\AsterDesk\\usage.exe",
+              "status": "exists",
+              "reason": "Fictional example: local executable existed at capture time."
+            }
+          ]
+        }
+      ]
+    },
+    "files": {
+      "status": "complete",
+      "warnings": [],
+      "items": [
+        {
+          "id": "c:\\program files\\asterdesk\\program.exe",
+          "name": "program.exe",
+          "source": "c:\\program files\\asterdesk",
+          "fields": {
+            "FilePath": "C:\\Program Files\\AsterDesk\\program.exe",
+            "Size": "24000",
+            "SHA256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "HashStatus": "hashed"
+          }
+        },
+        {
+          "id": "c:\\program files\\asterdesk\\cache.log",
+          "name": "cache.log",
+          "source": "c:\\program files\\asterdesk",
+          "fields": {
+            "FilePath": "C:\\Program Files\\AsterDesk\\cache.log",
+            "Size": "128",
+            "SHA256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "HashStatus": "hashed"
+          }
+        }
+      ]
+    }
+  },
+  "tracking": [
+    "c:\\program files\\asterdesk"
+  ]
+}

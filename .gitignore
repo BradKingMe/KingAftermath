@@ -1,0 +1,8 @@
+node_modules/
+captures/
+reports/
+.env*
+.unlazy/
+.impeccable/review/
+*.log
+test-results/
